@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'signing up for an account' do
-  senario 'the user visits the registration form from the home page' do
+  scenario 'the user visits the registration form from the home page' do
     visit '/'
     click_link('Sign Up')
 
