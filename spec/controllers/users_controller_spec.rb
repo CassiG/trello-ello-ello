@@ -18,7 +18,15 @@ describe UsersController do
       expect(response).to render_template(:new)
     end
   end
-  #
-  # context 'POST #create' do
-  # end
+
+  context 'POST #create' do
+    let!(:user) { FactoryGirl.create(:user) }
+
+    it 'creates new contact with valid attributes' do
+      expect { post :create, params: { user: FactoryGirl.attributes_for(:user) } }.to change{User.count}.by(1)
+    end
+
+    it 'does not create contact without valid attributes'
+    it 'redirects to home page'
+  end
 end
