@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Users do
+describe UsersController do
   context 'GET #new' do
     it 'returns a status code of 200' do
       expect(response.status).to eq 200
@@ -15,7 +15,7 @@ describe Users do
       expect(response).to render_template(:new)
     end
   end
-  # 
+  #
   # context 'POST #create' do
   # end
 end
