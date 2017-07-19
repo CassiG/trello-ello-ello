@@ -1,7 +1,12 @@
 require 'rails_helper'
 
 describe UsersController do
+  let(:user) { FactoryGirl.create(:user) }
   context 'GET #new' do
+    before(:each) do
+      get :new
+    end
+
     it 'returns a status code of 200' do
       expect(response.status).to eq 200
     end
@@ -11,7 +16,6 @@ describe UsersController do
     end
 
     it 'renders a new (register) view' do
-      get :new
       expect(response).to render_template(:new)
     end
   end
