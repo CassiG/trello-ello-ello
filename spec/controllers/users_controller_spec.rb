@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe UsersController do
-  let(:user) { FactoryGirl.create(:user) }
   context 'GET #new' do
     before(:each) do
       get :new
@@ -12,7 +11,7 @@ describe UsersController do
     end
 
     it 'assigns user to @user' do
-      expect(assigns[:user]).to eq(user)
+      expect(assigns[:user]).to be_a_new(User)
     end
 
     it 'renders a new (register) view' do
