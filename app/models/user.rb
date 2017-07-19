@@ -3,6 +3,8 @@ require 'bcrypt'
 class User < ApplicationRecord
 include BCrypt
 
+ validates :username, :email, :password_hash, { presence: true }
+
  def password
    @password ||= Password.new(password_hash)
  end
