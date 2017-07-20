@@ -5,8 +5,16 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create(user_params)
-    redirect_to boards_path
+    @user = User.new(user_params)
+    @errors = @user.errors.full_messages
+
+    if @user.save
+      session[:user_id] = @user.id
+      redirect_to boards_path
+    else
+      @errors
+      redirect_to new_user_path
+    end
   end
 
   private

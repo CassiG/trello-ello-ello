@@ -20,20 +20,32 @@ describe UsersController do
   end
 
   context 'POST #create' do
-    before(:each) do
-       post :create, params: { user: FactoryGirl.attributes_for(:user) }
+
+    context 'with valid attribute' do
+
+      before(:each) do
+         post :create, params: { user: FactoryGirl.attributes_for(:user) }
+      end
+
+      it 'creates new contact with valid attributes' do
+        expect { post :create, params: { user: FactoryGirl.attributes_for(:user) } }.to change{User.count}.by(1)
+      end
+
+      it 'redirects to home page with valid attributes' do
+        expect(response.status).to eq 302
+      end
     end
 
-    it 'creates new contact with valid attributes' do
-      expect { post :create, params: { user: FactoryGirl.attributes_for(:user) } }.to change{User.count}.by(1)
-    end
+    context 'without valid attribute' do
+      let(:user){ post :create, params: { user: { username: nil }}}
 
-    it 'does not create contact without valid attributes' do
-      expect { post :create, params: { user: { username: nil } }}.to change{User.count}.by(0)
-    end
+      it 'does not create contact' do
+        expect(user).to change{User.count}.by(0)
+      end
 
-    it 'redirects to home page' do
-      expect(response.status).to eq 302
+      it 'stay on to form' do
+        expect(user).to render_template(:new)
+      end
     end
 
   end

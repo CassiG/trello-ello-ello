@@ -1,4 +1,11 @@
-<%= form_for @users do |f| %>
+<%= form_for User.new do |f| %>
+
+  <% if @errors %>
+    <% @errors.each do |error| %>
+      <%= error %>
+    <% end %>
+  <% end %>
+
   <%= f.label :username %>
   <%= f.text_field :username %>
 
@@ -9,4 +16,5 @@
   <%= f.password_field :password %>
 
   <%= f.submit %>
+
 <% end %>
