@@ -7,4 +7,5 @@ feature 'signing up for an account' do
 
     expect(page).to have_current_path new_user_path
   end
+
 end
