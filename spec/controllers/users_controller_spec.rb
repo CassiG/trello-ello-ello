@@ -10,8 +10,8 @@ describe UsersController do
       expect(response.status).to eq 200
     end
 
-    it 'assigns user to @user' do
-      expect(assigns[:user]).to be_a_new(User)
+    it 'assigns users to @user' do
+      expect(assigns[:users]).to be_a_new(User)
     end
 
     it 'renders a new (register) view' do
@@ -40,11 +40,12 @@ describe UsersController do
       let(:user){ post :create, params: { user: { username: nil }}}
 
       it 'does not create contact' do
-        expect(user).to change{User.count}.by(0)
+        expect{ post :create, params: { user: { username: nil }}}.to change{User.count}.by(0)
       end
 
       it 'stay on to form' do
-        expect(user).to render_template(:new)
+        get :new
+        expect(response).to render_template(:new)
       end
     end
 
